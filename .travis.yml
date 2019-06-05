@@ -1,23 +1,19 @@
+---
 language: python
 python: 3.6.5
 services: docker
 env:
   global:
-  - ROLE_NAME: ansible_role_security_updates
-  - secure: AkICtvj5R2DYtw4KdfjFqDy1PBN1l0g4wfhnm8Egb+OthUeGnVa7uKatBHIUVG7scAk4So1NB1Gk6/a9PXPrNLJPzz3Zg0QKtZvP8If1KVNA8GKKmmk2Dyd8H10xV/mXaG+NYT9URw0FU0Of28MQ2V5+6igk1AKzygrFbqArijUn24l6PHTvYxROlJ2FwFOUbqxHhtoAmFdWzKiouEPkvyXjCC4lJ3K8q5nU+useyRLjb82h94hrCFQJ4OpRvVU4hn7Mq0dmJRlONVLICCB4dINqjMEU4XFwoFTDlYlCkquHvxmqRypbF7KBvwXAqKmW/W5hOJ3/MLD51NTBSLRJVAQb/6lFobNL0NqcmEK9RF+kdMHhm2E1VAuOhc/7xBXcivxoSOZTNsYoqJi4iENnH8nckLiFOYUZQMY50QPrOMOBHNsJjxsm4ZEoBHer1knRRRk3JmL1/ZBg0Z8kxSa+Yi9hUnyLyNtmSYWHIA7TSAExfECEhOHFJ7zgPxbpjSU8O+LdfAnkVj29sdEfvGaGiEqx9dp3D0P3Ovk491CYEWug1b536iWPOgNpY5s+1pVKew8ydHTh6mdC9wCgmPBDN5ZoC21jBmfzg16Od/5LxBLUFbbiTlJxYnlUyXFhby17ppg8x9VHdzAFmeHty2ogHBv5bnf3GBF+A5mB9gPPkFM=
+    - ROLE_NAME: ansible_role_security_updates
   matrix:
-  - MOLECULE_DISTRO: amazonlinux2
+    - MOLECULE_DISTRO: amazonlinux2
 install:
-- pip install molecule docker
-- npm install -g snyk
-- snyk test
+  - pip install molecule docker
 before_script:
-- cd ../
-- mv $ROLE_NAME leppikallio.$ROLE_NAME
-- cd leppikallio.$ROLE_NAME
+  - cd ../
+  - mv $ROLE_NAME leppikallio.$ROLE_NAME
+  - cd leppikallio.$ROLE_NAME
 script:
-- molecule test
-after_success:
-- snyk monitor
+  - molecule test
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
