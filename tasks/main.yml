@@ -1,0 +1,28 @@
+---
+#install security updates
+---
+
+# Install security updates in RHEL family AMI
+- name: "Install security updates in RHEL family AMI"
+  yum:
+    name: '*'
+    security: yes
+    state: latest
+  tags:
+    - always
+    - security-updates
+  when: ansible_os_family == "RedHat"
+
+# Install security updates in DEB family AMI
+- name: "Install security updates in DEB family AMI"
+  shell: cat /etc/apt/sources.list | grep secu > /tmp/security.sources.list \
+          && apt-get upgrade -oDir::Etc::SourceList=/tmp/security.sources.list --force-yes -y \
+          && rm /tmp/security.sources.list
+  args:
+    executable: /bin/bash
+  register: apt_upgrade
+  changed_when: apt_upgrade.stdout is not search("0 upgraded")
+  tags:
+    - always
+    - security-updates
+  when: ansible_os_family == "Debian"

@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Petteri Leppikallio
+  description: >
+              Installs security updates when ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  license: license (MIT, BSD)
+  min_ansible_version: 2.4
+  platforms:
+    - name: Any
+  galaxy_tags:
+    - system
+    - security
+    - update
+    - cloud
