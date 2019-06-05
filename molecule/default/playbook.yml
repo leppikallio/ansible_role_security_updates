@@ -7,10 +7,10 @@
       ansible_os_family = 'RedHat'
 
   pre_tasks:
-    - name: Update apt cache.
+      - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'RedHat'
       changed_when: false
 
   roles:
-    - role: leppikallio.ansible_role_security_updates
+      - role: leppikallio.ansible_role_security_updates
