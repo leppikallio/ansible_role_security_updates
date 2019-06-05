@@ -1,7 +1,4 @@
 ---
-#install security updates
----
-
 # Install security updates in RHEL family AMI
 - name: "Install security updates in RHEL family AMI"
   yum:
