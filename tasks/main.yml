@@ -4,7 +4,7 @@
   yum:
     name: '*'
     security: true
-    state: latest
+    state: latest # noqa 403
   tags:
     - always
     - security-updates
@@ -12,9 +12,11 @@
 
 # Install security updates in DEB family AMI
 - name: "Install security updates in DEB family AMI"
-  shell: cat /etc/apt/sources.list | grep secu > /tmp/security.sources.list \
-          && apt-get upgrade -oDir::Etc::SourceList=/tmp/security.sources.list --force-yes -y \
-          && rm /tmp/security.sources.list
+  shell: |
+    set -o pipefail
+    cat /etc/apt/sources.list | grep secu > /tmp/security.sources.list \
+      && apt-get upgrade -oDir::Etc::SourceList=/tmp/security.sources.list --force-yes -y \
+      && rm /tmp/security.sources.list
   args:
     executable: /bin/bash
   register: apt_upgrade
