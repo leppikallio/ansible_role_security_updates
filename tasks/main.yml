@@ -4,7 +4,7 @@
   yum:
     name: '*'
     security: true
-    state: latest # noqa 403
+    state: latest
   tags:
     - always
     - security-updates
